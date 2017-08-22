@@ -1,6 +1,6 @@
 {
   "name": "intl-chrome-i18n",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Provides internationalization functionalities based on Chrome.i18n, and formats the localized message strings with number, date, plural, and select placeholders.",
   "main": "index.js",
   "scripts": {
