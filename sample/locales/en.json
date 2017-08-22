@@ -1,0 +1,10 @@
+{
+	"hello_world": {
+		"message": "Hello world!",
+		"description": "Greetings message"
+	},
+	"annie_action": {
+		"message": "Annie took {numPhotos, number} photos.",
+		"description": "Describes what Annie did"
+	}
+}
