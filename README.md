@@ -1,5 +1,7 @@
 # intl-chrome-i18n [![Build Status](https://travis-ci.org/Collaborne/intl-chrome-i18n.svg?branch=master)](https://travis-ci.org/Collaborne/intl-chrome-i18n)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Collaborne/intl-chrome-i18n.svg)](https://greenkeeper.io/)
+
 Provides internationalization functionalities based on Chrome.i18n, and formats the localized message strings with number, date, plural, and select placeholders.
 
 ## Summary
