@@ -9,7 +9,7 @@ module.exports = class ChromeI18n {
 		this.locale = locale;
 		this.defaultLocale = defaultLocale;
 
-		const pathToTranslations = path.join(__dirname, pathToLocales, `${this.locale}.json`);
+		const pathToTranslations = path.join(pathToLocales, `${this.locale}.json`);
 		this.messages = require(pathToTranslations);
 	}
 

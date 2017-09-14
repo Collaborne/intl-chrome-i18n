@@ -1,6 +1,7 @@
 'use strict';
 
 const ChromeI18n = require('../index.js');
+const path = require('path');
 
 var areIntlLocalesSupported = require('intl-locales-supported');
 
@@ -20,9 +21,11 @@ if (global.Intl) {
 	global.Intl = require('intl');
 }
 
-const chromeI18nFrench = new ChromeI18n('fr', 'en', './sample/locales');
+const pathToLocales = path.join(__dirname, 'locales');
+
+const chromeI18nFrench = new ChromeI18n('fr', 'en', pathToLocales);
 console.log(chromeI18nFrench.getMessage('hello_world'));
 console.log(chromeI18nFrench.getMessage('annie_action', { numPhotos: 1000 }));
 
-const chromeI18nEnglish = new ChromeI18n('en', 'en', './sample/locales');
+const chromeI18nEnglish = new ChromeI18n('en', 'en', pathToLocales);
 console.log(chromeI18nEnglish.getMessage('annie_action', { numPhotos: 1000 }));
