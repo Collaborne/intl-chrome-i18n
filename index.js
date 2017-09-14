@@ -43,7 +43,7 @@ module.exports = class ChromeI18n {
 	 */
 	_getMessage(messageName) {
 		if (!this.messages || !this.messages.hasOwnProperty(messageName)) {
-			console.warn(`No message found with name ${messageName}. Using default locale '${this.defaultLocale}'`);
+			console.warn(`No message found with name ${messageName} in locale ${this.locale}. Using default locale '${this.defaultLocale}'`);
 			return this._getDefaultLocaleMessage(messageName);
 		}
 		return this.messages[messageName];
