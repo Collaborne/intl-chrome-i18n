@@ -23,9 +23,14 @@ if (global.Intl) {
 
 const pathToLocales = path.join(__dirname, 'locales');
 
+console.info('Printing message in french:');
 const chromeI18nFrench = new ChromeI18n('fr', 'en', pathToLocales);
-console.log(chromeI18nFrench.getMessage('hello_world'));
 console.log(chromeI18nFrench.getMessage('annie_action', { numPhotos: 1000 }));
 
+console.info('Printing same message in english:');
 const chromeI18nEnglish = new ChromeI18n('en', 'en', pathToLocales);
+console.log(chromeI18nEnglish.getMessage('annie_action', { numPhotos: 1000 }));
+
+console.info('Trying to print message in unsupported locale:');
+const chromeI18nItalian = new ChromeI18n('it', 'en', pathToLocales);
 console.log(chromeI18nEnglish.getMessage('annie_action', { numPhotos: 1000 }));
