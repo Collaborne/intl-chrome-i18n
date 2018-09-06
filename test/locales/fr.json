@@ -1,8 +1,4 @@
 {
-	"hello_world": {
-		"message": "Bonjour le monde!",
-		"description": "Greetings message"
-	},
 	"annie_action": {
 		"message": "Annie a pris {numPhotos, number} photographies.",
 		"description": "Describes what Annie did"
