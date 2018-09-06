@@ -1,10 +1,21 @@
-'use strict';
+import IntlMessageFormat from 'intl-messageformat';
+import * as path from 'path';
 
-const path = require('path');
-const IntlMessageFormat = require('intl-messageformat');
+interface TranslationEntry {
+	message: string;
+}
+interface Messages {
+	[key: string]: TranslationEntry;
+}
 
-module.exports = class ChromeI18n {
-	constructor(locale, defaultLocale, pathToLocales) {
+// tslint:disable no-console max-line-length
+export class ChromeI18n {
+	private locale: string;
+	private defaultLocale: string;
+	private messages: Messages | undefined;
+	private defaultMessages: Messages;
+
+	constructor(locale: string, defaultLocale: string, pathToLocales: string) {
 		this.locale = locale;
 		const pathToMessages = path.join(pathToLocales, `${this.locale}.json`);
 		try {
@@ -26,10 +37,17 @@ module.exports = class ChromeI18n {
 	}
 
 	/**
-	 * Get message with given name from the default locale
-	 * @param {String} messageName
+	 * Get a formatted message with the given name
 	 */
-	_getDefaultLocaleMessage(messageName) {
+	public getMessage(messageName: string, content?: object, formats?: object): string {
+		const message = this.doGetMessage(messageName);
+		return message ? new IntlMessageFormat(message.message, this.locale, formats).format(content) : messageName;
+	}
+
+	/**
+	 * Get message with given name from the default locale
+	 */
+	private getDefaultLocaleMessage(messageName: string): TranslationEntry | null {
 		if (!this.defaultMessages.hasOwnProperty(messageName)) {
 			console.warn(`WARN: No message found with name ${messageName} in default locale ${this.defaultLocale}`);
 			return null;
@@ -39,24 +57,12 @@ module.exports = class ChromeI18n {
 
 	/**
 	 * Get message with given name
-	 * @param {String} messageName
 	 */
-	_getMessage(messageName) {
+	private doGetMessage(messageName: string): TranslationEntry | null {
 		if (!this.messages || !this.messages.hasOwnProperty(messageName)) {
 			console.warn(`No message found with name ${messageName} in locale ${this.locale}. Using default locale '${this.defaultLocale}'`);
-			return this._getDefaultLocaleMessage(messageName);
+			return this.getDefaultLocaleMessage(messageName);
 		}
 		return this.messages[messageName];
-	}
-
-	/**
-	 * Get a formatted message with the given name
-	 * @param {String} messageName
-	 * @param {Object} [content]
-	 * @param {Object} [formats]
-	 */
-	getMessage(messageName, content, formats) {
-		const message = this._getMessage(messageName);
-		return message ? new IntlMessageFormat(message.message, this.locale, formats).format(content) : message;
 	}
 }

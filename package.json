@@ -2,9 +2,13 @@
   "name": "intl-chrome-i18n",
   "version": "1.2.4",
   "description": "Provides internationalization functionalities based on Chrome.i18n, and formats the localized message strings with number, date, plural, and select placeholders.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "build": "tsc",
+    "lint": "tslint -c tslint.json \"src/**/*.ts\"",
     "test": "echo \"Error: no test specified\"",
+    "prepublish": "npm run lint && npm run build",
     "sample": "node sample/index.js"
   },
   "repository": {
@@ -29,7 +33,12 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
+    "@collaborne/tsconfig": "^0.0.2",
     "intl": "^1.2.5",
-    "intl-locales-supported": "^1.0.0"
+    "intl-locales-supported": "^1.0.0",
+    "ts-node": "^7.0.0",
+    "tslint": "^5.10.0",
+    "tslint-config-collaborne": "^0.0.2",
+    "typescript": "^2.9.2"
   }
 }
