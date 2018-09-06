@@ -7,7 +7,11 @@ node_js:
 cache:
   directories:
   - node_modules
+env:
+  global:
+  - secure: "Cu12If3zJl3DX07SBqp/6eYIWfNEKZ01ukhbFQXCo8yk6ZH85ub4oHFEPYjS68X+/kzU4mX8MFr+reJPQNC7OzdAtMDNWpk+BT53WmhgnZ84l2Ux/k9UIE9ZLd/zh22o/U2ne3J5EDRIRP+yedE5PrbS31WHNG0yJSWtf1Q7drEn4ATH+x4fgtZXkiJU9Tq+FHP510t95eoWQ91Kpp2Hq0HHRxvv7kRXlGvrByhkoyUVYfHZ/CjPKXCLXiKQikhHQRh8NcuJVfZuSmYu4xHTDTCvbEn7a8LvjSGTGJ2Ss0vOCTL5/PT9OGqjCeigIw7xIDeKcE5DyHJjNy7aQ1AL8HAuBzUKqtYd0gr8WUw4pnkypaGNIGlXvR7Mh47vjPMG0xsNZ3qgvEx3jb2WlOL4hZHeMO92seyX97njOoDk576HJyEUyUy3cfs+27wzPdta4nv5eLIY1oHhd/CON+siH0sbou6aMkS/+jbBile93odMAy1sEPNmTYTSnbWAZ+BgOLdTwRrCZ+Hsty6Eb5PWaF1O2rzBxNyU+UDqvkjUkPqMQSFc+R/zQARDXGVtYTnzexYnVJo2bEV98sIBk3AUfrJxHX/3vyF0Er4vQxCqGrAH9T3cpj98fh9iVjasEYgc98XLIr7RIhN2ntmYi7OU1SjbzL3Dy4d67vlQorMI4r0="
 before_install:
+- npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
 - if [ -d node_modules ] && [ x$(cat node_modules/.last-node-version 2>/dev/null) != x$(node -e 'console.log(process.version)') ]; then npm rebuild --update-binary && node -e 'console.log(process.version)' > node_modules/.last-node-version; fi
 deploy:
   provider: npm
