@@ -1,3 +1,4 @@
+import * as fs from 'fs';
 import IntlMessageFormat from 'intl-messageformat';
 import * as path from 'path';
 
@@ -6,6 +7,10 @@ interface TranslationEntry {
 }
 interface Messages {
 	[key: string]: TranslationEntry;
+}
+
+function readFile(pathToFile: string) {
+	return JSON.parse(fs.readFileSync(pathToFile, 'utf8'));
 }
 
 // tslint:disable no-console max-line-length
@@ -19,7 +24,7 @@ export class ChromeI18n {
 		this.locale = locale;
 		const pathToMessages = path.join(pathToLocales, `${this.locale}.json`);
 		try {
-			this.messages = require(pathToMessages);
+			this.messages = readFile(pathToMessages);
 		} catch (error) {
 			console.warn(`WARN: Could not find locale '${locale}' at path ${pathToMessages}. Using default locale '${defaultLocale}'`);
 		}
@@ -30,7 +35,7 @@ export class ChromeI18n {
 		}
 		const pathToDefaultMessages = path.join(pathToLocales, `${this.defaultLocale}.json`);
 		try {
-			this.defaultMessages = require(pathToDefaultMessages);
+			this.defaultMessages = readFile(pathToDefaultMessages);
 		} catch (error) {
 			throw new Error(`No translations available for the default locale '${defaultLocale}' at path ${pathToDefaultMessages}. Default locale must have available translations.`);
 		}
